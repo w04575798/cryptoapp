@@ -9,8 +9,9 @@ class HomeScreen extends StatelessWidget {
 
             backgroundColor: const Color(0xff494F55),
             body:
-            Padding( SingleChildScrollView(
+            Padding( 
                 padding:const EdgeInsets.only(left:20.0, right:20, top:50),
+                child: SingleChildScrollView(
                 physics: ScrollPhysics(),
                 child:Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,28 +22,30 @@ class HomeScreen extends StatelessWidget {
 
                         ListView.builder(  
                             shrinkWrap: true,
-                            physics: NeverScrollableSCrollPhysics(),
+                            physics: NeverScrollableScrollPhysics(),
                             itemCount: 10, 
                             itemBuilder: (context, index) {
                                 
                                 return Padding( 
                                     padding: const EdgeInsets.only(bottom: 15.0),
                                     child: Container(
-                                width:MediaQuery.of(Context)
+                                width:MediaQuery.of(context).size.width,
                                 height: 60,
                                 child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                     children:[
                                         Container(
                                     width:60,
                                     height:60,
                                     decoration:BoxDecoration(
-                                           colors:Colors.grey[700],
-                                           borderRadius:BorderRadius.circular(15)
-                                            boxShadow: [BoxShadow(color:colors.grey[700]!,
-                                            offset: const Offset(4, 4),
-                                            blurRadius: 5
+                                           color:Colors.grey[700],
+                                           borderRadius:BorderRadius.circular(15),
+                                            boxShadow: [
+                                                BoxShadow(
+                                                    color:Colors.grey[700]!,
+                                                    offset: const Offset(4, 4),
+                                                    blurRadius: 5,
                                              )//boxShadow
                                             ]
 
@@ -51,14 +54,22 @@ class HomeScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(10),
                                         child: Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png')
                                     ), //padding
-                                        )//Container
-                                        cons SizedBox(width:20, )
+                                        ),//Container
+                                        const SizedBox(width:20, ),
                                         Column (
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                         children:[
-                                            Text("Bitcoin", style: textStyle(18, Colors.white, FontWeight.w600),
-                                            )
-                                        ]
-                                        )
+                                            Text("\$$ 2", 
+                                            style: textStyle
+                                            (18, Colors.white, FontWeight.w600),
+                                            ),//text
+                                            Text("10 %", 
+                                            style: textStyle
+                                            (18, Colors.grey, FontWeight.w600),
+                                            ),//text
+
+                                        ],
+                                        )//column
                                     ],
                                 )//row
                                 
