@@ -53,6 +53,7 @@ class HomeScreen extends StatelessWidget {
                               Column (
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children:[
+                                    const SizedBox(height:10,),
                                   Text("Bitcoin", 
                                     style: textStyle(18, Colors.white, FontWeight.w600),
                                   ),//text
@@ -66,6 +67,8 @@ class HomeScreen extends StatelessWidget {
                           Column (
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children:[
+                             const SizedBox(height:10,),
+
                               Text("\$ 200", 
                                 style: textStyle(18, Colors.white, FontWeight.w600),
                               ),//text
