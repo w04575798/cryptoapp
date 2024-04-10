@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../utils.dart';
+import 'package:get/get.dart'; // Import GetX package
+import '../utils.dart'; // Import your custom utilities file
+import '../controllers/coincontroller.dart';
 
 class HomeScreen extends StatelessWidget {
   final CoinController controller = Get.put(CoinController());
@@ -10,103 +12,102 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: const Color(0xff494F55),
       body: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20, top: 50),
-        child: SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Crypto Market",
-                style: textStyle(24, Colors.white, FontWeight.bold),
-              ), //text
-              Obx(
-                () => controller.isLoading.value ? const Center(child: CircularProgressIndicator());
-                : 
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 60,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[700],
-                                    borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey[700]!,
-                                        offset: const Offset(4, 4),
-                                        blurRadius: 5,
-                                      ), //boxShadow
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Crypto Market",
+              style: textStyle(24, Colors.white, FontWeight.bold),
+            ), //text
+            Expanded(
+              child: Obx(
+                () => controller.isLoading.value
+                    ? Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[700],
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey[700]!,
+                                              offset: const Offset(4, 4),
+                                              blurRadius: 5,
+                                            ), //boxShadow
+                                          ],
+                                        ), //boxDecoration
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Image.network(
+                                            controller.coinsList[index].image),//image network padding
+                                        ), //padding
+                                      ), //Container
+                                      const SizedBox(width: 20),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            controller.coinsList[index].name,
+                                            style: textStyle(18, Colors.white,
+                                                FontWeight.w600),
+                                          ), //text
+                                          Text(
+                                            "${controller.coinsList[index].priceChangePercentage24H} %",
+                                            style: textStyle(18, Colors.grey,
+                                                FontWeight.w600),
+                                          ), //text
+                                        ],
+                                      ), //column
                                     ],
-                                  ), //boxDecoration
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.network(
-                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png'),
-                                  ), //padding
-                                ), //Container
-                                const SizedBox(width: 20), // Moved this line to be outside Container
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Bitcoin",
-                                      style: textStyle(
-                                          18, Colors.white, FontWeight.w600),
-                                    ), //text
-                                    Text(
-                                      "10 %",
-                                      style: textStyle(
-                                          18, Colors.grey, FontWeight.w600),
-                                    ), //text
-                                  ],
-                                ), //column
-                              ],
-                            ), // Add missing closing parenthesis here
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "\$ 200",
-                                  style: textStyle(
-                                      18, Colors.white, FontWeight.w600),
-                                ), //text
-                                Text(
-                                  "BI",
-                                  style: textStyle(
-                                      18, Colors.grey, FontWeight.w600),
-                                ), //text
-                              ],
-                            ), //column
-                          ],
-                        ) //row
-                      ) //container
-                    ); //padding
-                  },
-                ),
-              ), //Listview.builder
-            ],
-          ), //column
-        ), //singlechildscrollview
-      ), //padding
-    ); //scaffold
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "\$ ${controller.coinsList[index].currentPrice}",
+                                        style: textStyle(18, Colors.white,
+                                            FontWeight.w600),
+                                      ), //text
+                                      Text(
+                                        controller.coinsList[index].symbol,
+                                        style: textStyle(18, Colors.grey,
+                                            FontWeight.w600),
+                                      ), //text
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

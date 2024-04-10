@@ -1,100 +1,104 @@
+//cmodel.dart
 // To parse this JSON data, do
 //
 //     final welcome = welcomeFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Welcome> welcomeFromJson(String str) => List<Welcome>.from(json.decode(str).map((x) => Welcome.fromJson(x)));
+List<Coin> coinFromJson(String str) => List<Coin>.from(json.decode(str).map((x) => Coin.fromJson(x)));
 
-String welcomeToJson(List<Welcome> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String coinToJson(List<Coin> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Welcome {
-    String id;
-    String symbol;
-    String name;
-    String image;
-    double currentPrice;
-    int marketCap;
-    int marketCapRank;
-    int? fullyDilutedValuation;
-    int totalVolume;
-    double high24H;
-    double low24H;
-    double priceChange24H;
-    double priceChangePercentage24H;
-    double marketCapChange24H;
-    double marketCapChangePercentage24H;
-    double circulatingSupply;
-    double? totalSupply;
-    double? maxSupply;
-    double ath;
-    double athChangePercentage;
-    DateTime athDate;
-    double atl;
-    double atlChangePercentage;
-    DateTime atlDate;
-    Roi? roi;
-    DateTime lastUpdated;
+class Coin {
+  String id;
+  String symbol;
+  String name;
+  String image;
+  double currentPrice;
+  int marketCap;
+  int marketCapRank;
+  int? fullyDilutedValuation;
+  int totalVolume;
+  double high24H;
+  double low24H;
+  double priceChange24H;
+  double priceChangePercentage24H;
+  double marketCapChange24H;
+  double marketCapChangePercentage24H;
+  double circulatingSupply;
+  double? totalSupply;
+  double? maxSupply;
+  double ath;
+  double athChangePercentage;
+  DateTime athDate;
+  double atl;
+  double atlChangePercentage;
+  DateTime atlDate;
+  Roi? roi;
+  DateTime lastUpdated;
 
-    Welcome({
-        required this.id,
-        required this.symbol,
-        required this.name,
-        required this.image,
-        required this.currentPrice,
-        required this.marketCap,
-        required this.marketCapRank,
-        required this.fullyDilutedValuation,
-        required this.totalVolume,
-        required this.high24H,
-        required this.low24H,
-        required this.priceChange24H,
-        required this.priceChangePercentage24H,
-        required this.marketCapChange24H,
-        required this.marketCapChangePercentage24H,
-        required this.circulatingSupply,
-        required this.totalSupply,
-        required this.maxSupply,
-        required this.ath,
-        required this.athChangePercentage,
-        required this.athDate,
-        required this.atl,
-        required this.atlChangePercentage,
-        required this.atlDate,
-        required this.roi,
-        required this.lastUpdated,
-    });
+  Coin({
+    required this.id,
+    required this.symbol,
+    required this.name,
+    required this.image,
+    required this.currentPrice,
+    required this.marketCap,
+    required this.marketCapRank,
+    required this.fullyDilutedValuation,
+    required this.totalVolume,
+    required this.high24H,
+    required this.low24H,
+    required this.priceChange24H,
+    required this.priceChangePercentage24H,
+    required this.marketCapChange24H,
+    required this.marketCapChangePercentage24H,
+    required this.circulatingSupply,
+    required this.totalSupply,
+    required this.maxSupply,
+    required this.ath,
+    required this.athChangePercentage,
+    required this.athDate,
+    required this.atl,
+    required this.atlChangePercentage,
+    required this.atlDate,
+    required this.roi,
+    required this.lastUpdated,
+  });
 
-    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory Coin.fromJson(Map<String, dynamic> json) => Coin(
         id: json["id"],
         symbol: json["symbol"],
         name: json["name"],
         image: json["image"],
-        currentPrice: json["current_price"]?.toDouble(),
-        marketCap: json["market_cap"],
-        marketCapRank: json["market_cap_rank"],
+        currentPrice: json["current_price"]?.toDouble() ?? 0.0,
+        marketCap: json["market_cap"] ?? 0,
+        marketCapRank: json["market_cap_rank"] ?? 0,
         fullyDilutedValuation: json["fully_diluted_valuation"],
-        totalVolume: json["total_volume"],
-        high24H: json["high_24h"]?.toDouble(),
-        low24H: json["low_24h"]?.toDouble(),
-        priceChange24H: json["price_change_24h"]?.toDouble(),
-        priceChangePercentage24H: json["price_change_percentage_24h"]?.toDouble(),
-        marketCapChange24H: json["market_cap_change_24h"]?.toDouble(),
-        marketCapChangePercentage24H: json["market_cap_change_percentage_24h"]?.toDouble(),
-        circulatingSupply: json["circulating_supply"]?.toDouble(),
-        totalSupply: json["total_supply"]?.toDouble(),
-        maxSupply: json["max_supply"]?.toDouble(),
-        ath: json["ath"]?.toDouble(),
-        athChangePercentage: json["ath_change_percentage"]?.toDouble(),
+        totalVolume: json["total_volume"] ?? 0,
+        high24H: json["high_24h"]?.toDouble() ?? 0.0,
+        low24H: json["low_24h"]?.toDouble() ?? 0.0,
+        priceChange24H: json["price_change_24h"]?.toDouble() ?? 0.0,
+        priceChangePercentage24H:
+            json["price_change_percentage_24h"]?.toDouble() ?? 0.0,
+        marketCapChange24H: json["market_cap_change_24h"]?.toDouble() ?? 0.0,
+        marketCapChangePercentage24H: json["market_cap_change_percentage_24h"]
+                ?.toDouble() ??
+            0.0,
+        circulatingSupply: json["circulating_supply"]?.toDouble() ?? 0.0,
+        totalSupply: json["total_supply"]?.toDouble() ?? 0.0,
+        maxSupply: json["max_supply"]?.toDouble() ?? 0.0,
+        ath: json["ath"]?.toDouble() ?? 0.0,
+        athChangePercentage: json["ath_change_percentage"]?.toDouble() ?? 0.0,
         athDate: DateTime.parse(json["ath_date"]),
-        atl: json["atl"]?.toDouble(),
-        atlChangePercentage: json["atl_change_percentage"]?.toDouble(),
+        atl: json["atl"]?.toDouble() ?? 0.0,
+        atlChangePercentage: json["atl_change_percentage"]?.toDouble() ?? 0.0,
         atlDate: DateTime.parse(json["atl_date"]),
         roi: json["roi"] == null ? null : Roi.fromJson(json["roi"]),
         lastUpdated: DateTime.parse(json["last_updated"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "symbol": symbol,
         "name": name,
@@ -121,53 +125,53 @@ class Welcome {
         "atl_date": atlDate.toIso8601String(),
         "roi": roi?.toJson(),
         "last_updated": lastUpdated.toIso8601String(),
-    };
+      };
 }
 
 class Roi {
-    double times;
-    Currency currency;
-    double percentage;
+  double times;
+  Currency currency;
+  double percentage;
 
-    Roi({
-        required this.times,
-        required this.currency,
-        required this.percentage,
-    });
+  Roi({
+    required this.times,
+    required this.currency,
+    required this.percentage,
+  });
 
-    factory Roi.fromJson(Map<String, dynamic> json) => Roi(
-        times: json["times"]?.toDouble(),
-        currency: currencyValues.map[json["currency"]]!,
-        percentage: json["percentage"]?.toDouble(),
-    );
+  factory Roi.fromJson(Map<String, dynamic> json) => Roi(
+        times: json["times"]?.toDouble() ?? 0.0,
+        currency: currencyValues.map[json["currency"]] ?? Currency.BTC,
+        percentage: json["percentage"]?.toDouble() ?? 0.0,
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "times": times,
         "currency": currencyValues.reverse[currency],
         "percentage": percentage,
-    };
+      };
 }
 
 enum Currency {
-    BTC,
-    ETH,
-    USD
+  BTC,
+  ETH,
+  USD
 }
 
 final currencyValues = EnumValues({
-    "btc": Currency.BTC,
-    "eth": Currency.ETH,
-    "usd": Currency.USD
+  "btc": Currency.BTC,
+  "eth": Currency.ETH,
+  "usd": Currency.USD
 });
 
 class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
 
-    EnumValues(this.map);
+  EnumValues(this.map);
 
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
