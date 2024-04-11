@@ -1,3 +1,4 @@
+//splash.dart
 import 'package:flutter/material.dart';
 import 'navbar.dart'; // Import the navbar.dart file
 
@@ -24,7 +25,7 @@ class _SplashState extends State<Splash> {
             children: [
               Image.asset('assets/images/loading.gif'),
               Text(
-                'Coin Wallet',
+                'Coin App',
                 style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),
               ), ///text
               Padding(
@@ -44,7 +45,7 @@ class _SplashState extends State<Splash> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'CREATE PORTFOLIO  ',
+                          'SEE PRICE TRACKER  ',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,
