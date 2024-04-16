@@ -24,33 +24,50 @@ class GenerateKeyScreen extends StatelessWidget {
                 final mnemonic = await walletProvider.generateMnemonic();
                 final privateKey = await walletProvider.getPrivateKey(mnemonic);
                 final publicKey = await walletProvider.getPublicKey(privateKey);
-                // Display the mnemonic, private key, and public key
-                showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    title: const Text('Generated Keys'),
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Mnemonic: $mnemonic'),
-                        Text('Private Key: $privateKey'),
-                        Text('Public Key: $publicKey'),
-                      ],
+                // Display the mnemonic, private key, and public key as text
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => GeneratedKeysScreen(
+                      mnemonic: mnemonic,
+                      privateKey: privateKey,
+                      publicKey: publicKey.hex, // Convert EthereumAddress to String
                     ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('Close'),
-                      ),
-                    ],
                   ),
                 );
               },
-              child: const Text('Generate Keys'),
+              child: const Text('Create Account'),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class GeneratedKeysScreen extends StatelessWidget {
+  final String mnemonic;
+  final String privateKey;
+  final String publicKey;
+
+  const GeneratedKeysScreen({
+    required this.mnemonic,
+    required this.privateKey,
+    required this.publicKey,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final allKeys = 'Mnemonic: $mnemonic\nPrivate Key: $privateKey\nPublic Key: $publicKey';
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Generated Keys'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SelectableText(allKeys),
       ),
     );
   }

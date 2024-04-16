@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'generateKey.dart';
 import '../providers/walletProvider.dart';
+import 'import.dart';
+
 
  class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class _NavBarState extends State<NavBar> {
   int _currentIndex = 0;
   List<Widget> pages = [
     HomeScreen(),
-    HomeScreen(),
+    ImportWallet(),
     GenerateKeyScreen(),
 
   ];
