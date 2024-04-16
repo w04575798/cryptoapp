@@ -45,7 +45,7 @@ class _SplashState extends State<Splash> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'SEE PRICE TRACKER  ',
+                          'SEE MORE  ',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,

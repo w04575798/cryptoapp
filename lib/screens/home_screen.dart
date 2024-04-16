@@ -1,4 +1,3 @@
-//homescreendart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Import GetX package
 import '../utils.dart'; // Import your custom utilities file

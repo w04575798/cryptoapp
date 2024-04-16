@@ -2,19 +2,28 @@
 import 'screens/home_screen.dart'; 
 import 'package:flutter/material.dart';
 import 'screens/splash.dart';
+import 'package:provider/provider.dart'; 
+import 'providers/walletProvider.dart';
+import 'screens/generateKey.dart'; 
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Splash(), // Use HomeScreen widget as the home
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WalletProvider>(
+          create: (_) => WalletProvider(),
+        ),
+        // Add other providers as needed
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+      ),
     );
   }
 }
