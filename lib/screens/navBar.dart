@@ -34,7 +34,6 @@ class _NavBarState extends State<NavBar> {
     double myWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: pages.elementAt(_currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
@@ -42,6 +41,7 @@ class _NavBarState extends State<NavBar> {
           showUnselectedLabels: false,
           selectedItemColor: Color(0xff494F55),
           unselectedItemColor: Colors.grey,
+           backgroundColor: Color(0xffFBC700),
           onTap: _changePage,
           items: [
             BottomNavigationBarItem(

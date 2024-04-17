@@ -1,3 +1,4 @@
+//wallet.dart
 import 'package:flutter/material.dart';
 import 'package:crypto_app/providers/walletProvider.dart';
 import '../providers/balances.dart'; 
@@ -44,6 +45,7 @@ class _WalletPageState extends State<WalletPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wallet'),
+        backgroundColor:Color(0xFF6CE4AC),
       ),
       body: Center(
         child: Column(

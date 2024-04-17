@@ -10,35 +10,48 @@ class GenerateKeyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Generate Mnemonic'),
+        title: const Text('Create Account', style: TextStyle(color: Colors.white)), // Change header text color to white
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                // Ensure that GenerateKeyScreen is under the MultiProvider or Provider<WalletProvider>
-                final walletProvider = Provider.of<WalletProvider>(context, listen: false);
-                final mnemonic = await walletProvider.generateMnemonic();
-                final privateKey = await walletProvider.getPrivateKey(mnemonic);
-                final publicKey = await walletProvider.getPublicKey(privateKey);
-                // Display the mnemonic, private key, and public key as text
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => GeneratedKeysScreen(
-                      mnemonic: mnemonic,
-                      privateKey: privateKey,
-                      publicKey: publicKey.hex, // Convert EthereumAddress to String
+      backgroundColor: Color(0xFF6CE4AC),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Create Account',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white), // Change header text color to white
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  final walletProvider = Provider.of<WalletProvider>(context, listen: false);
+                  final mnemonic = await walletProvider.generateMnemonic();
+                  final privateKey = await walletProvider.getPrivateKey(mnemonic);
+                  final publicKey = await walletProvider.getPublicKey(privateKey);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => GeneratedKeysScreen(
+                        mnemonic: mnemonic,
+                        privateKey: privateKey,
+                        publicKey: publicKey.hex,
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: const Text('Create Account'),
-            ),
-          ],
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xffFBC700),
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                ),
+                child: const Text(
+                  'Generate Key',
+                  style: TextStyle(fontSize: 18, color: Colors.black), // Change button text color to grey
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -63,7 +76,7 @@ class GeneratedKeysScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Generated Keys'),
+        title: const Text('Generated Key'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

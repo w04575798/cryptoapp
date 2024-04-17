@@ -15,8 +15,7 @@ class _ImportWalletState extends State<ImportWallet> {
   String verificationText = '';
 
   void verifyMnemonic() async {
-    final walletProvider =
-        Provider.of<WalletProvider>(context, listen: false);
+    final walletProvider = Provider.of<WalletProvider>(context, listen: false);
 
     // Call the getPrivateKey function from the WalletProvider
     final privateKey = await walletProvider.getPrivateKey(verificationText);
@@ -56,17 +55,22 @@ class _ImportWalletState extends State<ImportWallet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Import from Seed'),
+        title: const Text('Import Seed'),
       ),
+      backgroundColor: Color(0xFF6CE4AC), // Set background color
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Please Enter your mnemonic phrase:',
-              style: TextStyle(fontSize: 18.0),
+            Text(
+              'Please Enter Your Key:',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // Set text color to white
+              ),
             ),
             const SizedBox(height: 24.0),
             TextField(
@@ -75,14 +79,22 @@ class _ImportWalletState extends State<ImportWallet> {
                   verificationText = value;
                 });
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Enter mnemonic phrase',
+                filled: true,
+                fillColor: Colors.white, // Set text field color to white
               ),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: verifyMnemonic,
-              child: const Text('Import'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xffFBC700), // Yellow color
+              ),
+              child: Text(
+                'Import',
+                style: TextStyle(color: Colors.black), // Set button text color to grey
+              ),
             ),
             const SizedBox(height: 24.0),
           ],
