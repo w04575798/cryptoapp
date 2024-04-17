@@ -1,3 +1,4 @@
+// import.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/walletProvider.dart';
@@ -21,10 +22,15 @@ class _ImportWalletState extends State<ImportWallet> {
     final privateKey = await walletProvider.getPrivateKey(verificationText);
 
     if (privateKey != null) {
-      // Navigate to the WalletPage with the private key
+      // Navigate to the WalletPage with the private key and walletProvider
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => WalletPage(privateKey: privateKey)),
+        MaterialPageRoute(
+          builder: (context) => WalletPage(
+            privateKey: privateKey,
+            walletProvider: walletProvider,
+          ),
+        ),
       );
     } else {
       // Show an error message if verification fails
